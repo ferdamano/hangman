@@ -1,12 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html t="0x31" i="YA-9517" v="1.60">
     <head>
         <title>Hangman (Game)</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="home">
             <div class="title">Hangman</div>
             <div class="button anim" onclick="startGame()">Play</div>
-            <div class="foother">Heavily inspired work by Thomas Hj</div>
+            <div class="foother">Coded by Thomas Hj</div>
         </div>
         <div id="result" class="h">
             <div class="title" id="rT"></div>
@@ -31,13 +33,13 @@
             </div>
             <div id="tastatur">
                 <div id="moveKeybord"><div class="marg"></div></div>
-                <div id="keybord"></div>
+                <div id="keyboard"></div>
             </div>
             <div class="hint" id="hint">
                 <div class="title">Hint<div class="exit" onclick="hintExit()">X</div></div>
                 <div class="body" id="hintText"></div>
             </div>
         </div>
-        <script src="/index.js"></script>
+        <script src="bundle.js"></script>
     </body>
 </html>

@@ -1,11 +1,32 @@
 {
   "name": "hangman",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "browserify main.js -o bundle.js",
+    "start": "browserify main.js -o bundle.js && npx http-server",
+    "dev": "watchify main.js -o bundle.js"
   },
   "author": "Ferdinand McDaniel Amano",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/ferdamano/hangman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ferdamano/hangman/issues"
+  },
+  "homepage": "https://github.com/ferdamano/hangman#readme",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "babel-jest": "^28.1.1",
+    "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1"
+  },
+  "dependencies": {
+    "watchify": "^3.11.1"
+  }
 }
