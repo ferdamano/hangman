@@ -1,12 +1,14 @@
 {
   "name": "hangman",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "jest",
-    "build": "browserify main.js -o bundle.js",
-    "start": "browserify main.js -o bundle.js && npx http-server",
-    "dev": "watchify main.js -o bundle.js"
+    "start": "npx http-server",
+    "build:debug": "browserify main.js -d --s hangman > dist/bundle.js",
+    "build:min": "browserify main.js --s hangman | uglifyjs -c > dist/bundle.min.js",
+    "build": "npm run build:debug && npm run build:min",
+    "watch": "watchify main.js -d --s hangman -o dist/bundle.js -v"
   },
   "author": "Ferdinand McDaniel Amano",
   "license": "ISC",
@@ -24,7 +26,8 @@
     "@babel/preset-env": "^7.18.2",
     "babel-jest": "^28.1.1",
     "jest": "^28.1.1",
-    "jest-environment-jsdom": "^28.1.1"
+    "jest-environment-jsdom": "^28.1.1",
+    "uglify-js": "^3.16.1"
   },
   "dependencies": {
     "watchify": "^3.11.1"

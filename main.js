@@ -102,10 +102,6 @@ function createWord() {
     }
 }
 
-
-
-
-
 // If letter "X" exist
 function isExist(e) {
     e = e.toUpperCase()
@@ -248,5 +244,9 @@ function getById(id) {
 }
 
 module.exports = {
-    createKeyboard, KEYS
-}
+    KEYS,
+    createKeyboard,
+    hint,
+    hintExit,
+    startGame
+};
