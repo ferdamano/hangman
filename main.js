@@ -51,7 +51,7 @@ function startGame() {
 function newGame() {
     clearTastatur()
     clearPlayer()
-    createWord()
+    createWord(getGameWord())
 }
 
 // Clear keyboard
@@ -81,26 +81,7 @@ function clearPlayer() {
     getById("hint").style.display = "none"
 }
 
-// Get new word
-function createWord() {
-    var d = getById("letter")
-    d.innerHTML = ""
-    select = Math.floor(Math.random() * word.length)
-    for(a = 0; a < word[select][0].length; a++) {
-        var x = word[select][0][a].toUpperCase()
-        var b = document.createElement("span")
-        b.className = "l" + (x == " " ? " ls" : "")
-        b.innerHTML = "&nbsp"
-        b.id = "l" + a;
-        d.appendChild(b)
-        
-        if(x != " ") {
-            if(wordLeft.indexOf(x) == -1) {
-                wordLeft.push(x)
-            }
-        }
-    }
-}
+
 
 // If letter "X" exist
 function isExist(e) {
@@ -217,6 +198,41 @@ function bTas(a) {
 
 /**
  * setup
+ * utility function
+ * @return {string} word
+ */
+function getGameWord() {
+    let index = Math.floor(Math.random() * word.length);
+    return word[index];
+}
+
+/**
+ * setup
+ * DOM mmanipulation
+ * @param {string} gameWord
+ */
+function createWord(gameWord) {
+    var d = getById("letter")
+    d.innerHTML = ""
+    const selected = gameWord[0];
+    for(a = 0; a < selected.length; a++) {
+        var x = selected[a].toUpperCase()
+        var b = document.createElement("span")
+        b.className = "l" + (x == " " ? " ls" : "")
+        b.innerHTML = "&nbsp"
+        b.id = "l" + a;
+        d.appendChild(b)
+        
+        if(x != " ") {
+            if(wordLeft.indexOf(x) == -1) {
+                wordLeft.push(x)
+            }
+        }
+    }
+}
+
+/**
+ * setup
  * DOM mmanipulation
  */
 function createKeyboard() {
@@ -235,7 +251,7 @@ function createKeyboard() {
 }
 
 /**
- * func
+ * utility function
  * @param {string} id
  * @returns element
  */
@@ -246,7 +262,10 @@ function getById(id) {
 module.exports = {
     KEYS,
     createKeyboard,
+    createWord,
+    getGameWord,
     hint,
     hintExit,
-    startGame
+    startGame,
+    word
 };
