@@ -5,10 +5,10 @@
   "scripts": {
     "test": "jest",
     "start": "npx http-server",
-    "build:debug": "browserify main.js -d --s hangman > dist/bundle.js",
-    "build:min": "browserify main.js --s hangman | uglifyjs -c > dist/bundle.min.js",
+    "build:debug": "browserify main.js -d --s hangmangame > dist/bundle.js",
+    "build:min": "browserify main.js --s hangmangame | uglifyjs -c > dist/bundle.min.js",
     "build": "npm run build:debug && npm run build:min",
-    "watch": "watchify main.js -d --s hangman -o dist/bundle.js -v"
+    "watch": "watchify main.js -d --s hangmangame -o dist/bundle.js -v"
   },
   "author": "Ferdinand McDaniel Amano",
   "license": "ISC",

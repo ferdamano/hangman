@@ -1,13 +1,30 @@
 const fs = require("fs");
 
 window.document.body.innerHTML = fs.readFileSync('./index.html');
-const {createKeyboard, createWord, getGameWord, KEYS, word} = require('./main');
+const mainjs = require('./main');
+const {bTas, createKeyboard, createWord, getGameWord, keyboardListener, KEYS, word} = mainjs;
 let gameWord = "";
 
 describe("setup game", () => {
+    jest.mock('./main');
     test('should display letter buttons as inputs', () => {
         createKeyboard();
         expect(document.querySelectorAll('#keyboard button.b').length).toEqual(26);
+    })
+
+    test('letter key is pressed, listener should be called', () => {
+        let events = {};
+        document.addEventListener = jest.fn((event, cb) => {
+            events[event] = cb;
+        });
+
+        const spy = jest.spyOn(mainjs, 'bTas');
+
+        var event = new KeyboardEvent('keydown', {'keyCode': 65});
+        document.dispatchEvent(event);
+
+        expect(spy).toHaveBeenCalled();
+        spy.mockRestore();
     })
 
     test('should choose one word to play the game', () => {
