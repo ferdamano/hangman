@@ -59,7 +59,7 @@ function keyboardListener(e){
  */
 function getGameWord() {
     let index = Math.floor(Math.random() * word.length);
-    hangman.select = index;
+    hangman.setSelect(index);
     return word[index];
 }
 
@@ -121,6 +121,22 @@ class HangmanGame {
     }
 
     /**
+     * 
+     * @param {number} value 
+     */
+    setSelect(value) {
+        this.select = value
+    }
+
+    /**
+     * 
+     * @param {number} value 
+     */
+     setFail(value) {
+        this.fail = value
+    }
+
+    /**
      * reset
      */
     newGame() {
@@ -153,8 +169,7 @@ class HangmanGame {
      * DOM manipulation
      */
     showNextFail() {
-        this.fail++
-        switch(this.fail) {
+        switch(++this.fail) {
             case 1:
                 getById("g0").setAttribute("data", "true")
                 break;
@@ -325,6 +340,7 @@ class HangmanGame {
 
 
 module.exports = {
+    word,
     hangman,
     KEYS,
     createKeyboard,
