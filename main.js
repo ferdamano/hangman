@@ -48,7 +48,7 @@ function keyboardListener(e){
         letterButtons.forEach((button, id) => {
             if(button.innerText == e.key.toUpperCase()) index = id;
         });
-        this.bTas(letterButtons.item(index));
+        hangman.bTas(letterButtons.item(index));
     }
 }
 
@@ -75,7 +75,7 @@ function createKeyboard() {
         b.innerText = key.toUpperCase();
         b.setAttribute("data", "")
         b.onclick = function() {
-            bTas(this);
+            hangman.bTas(this);
         }
         container.appendChild(b)
     });
@@ -101,7 +101,16 @@ function startGame() {
     hangman.newGame();
 }
 
+/**
+ * 
+ * @returns Hangman instance
+ */
+function getGame() {
+    return hangman;
+}
+
 class HangmanGame {
+
     constructor() {
 
         // Game memory
@@ -126,14 +135,14 @@ class HangmanGame {
      */
     bTas(a) {
         if(!!a && a.getAttribute("data") == "") {
-            var x = isExist(a.innerText)
+            var x = this.isExist(a.innerText)
             a.setAttribute("data", x)
             if(x) {
                 if(this.wordLeft.length == 0) {
                     gameEnd(true)
                 }
             } else {
-                showNextFail()
+                this.showNextFail()
             }
         }
     }
@@ -185,7 +194,7 @@ class HangmanGame {
             
             case 10:
                 getById("g6").setAttribute("r", "true")
-                gameEnd(false)
+                this.gameEnd(false)
                 break;
         }
     }
@@ -215,7 +224,7 @@ class HangmanGame {
      */
      clearKeyboard() {
         var e = document.getElementsByClassName("b")
-        for(a = 0; a < e.length; a++) {
+        for(var a = 0; a < e.length; a++) {
             e[a].setAttribute("data", "")
         }
     }
@@ -251,7 +260,7 @@ class HangmanGame {
         var d = getById("letter")
         d.innerHTML = ""
         const selected = gameWord[0];
-        for(a = 0; a < selected.length; a++) {
+        for(let a = 0; a < selected.length; a++) {
             var x = selected[a].toUpperCase()
             var b = document.createElement("span")
             b.className = "l" + (x == " " ? " ls" : "")
@@ -276,7 +285,7 @@ class HangmanGame {
         var x = this.wordLeft.indexOf(e)
         if(x != -1) {
             this.wordLeft.splice(x, 1)
-            typeWord(e)
+            this.typeWord(e)
             return true
         }
         return false
@@ -304,7 +313,7 @@ class HangmanGame {
      * @param {*} e 
      */
     typeWord(e) {
-        for(a = 0; a < word[this.select][0].length; a++) {
+        for(let a = 0; a < word[this.select][0].length; a++) {
             if(word[this.select][0][a].toUpperCase() == e) {
                 getById("l" + a).innerText = e
             }
@@ -319,6 +328,7 @@ module.exports = {
     KEYS,
     createKeyboard,
     getGameWord,
+    getGame,
     keyboardListener,
     startGame,
 };
