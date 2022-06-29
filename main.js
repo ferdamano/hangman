@@ -59,6 +59,7 @@ function keyboardListener(e){
  */
 function getGameWord() {
     let index = Math.floor(Math.random() * word.length);
+    hangman.select = index;
     return word[index];
 }
 
@@ -139,7 +140,7 @@ class HangmanGame {
             a.setAttribute("data", x)
             if(x) {
                 if(this.wordLeft.length == 0) {
-                    gameEnd(true)
+                    this.gameEnd(true)
                 }
             } else {
                 this.showNextFail()
@@ -331,4 +332,5 @@ module.exports = {
     getGame,
     keyboardListener,
     startGame,
+    HangmanGame,
 };
